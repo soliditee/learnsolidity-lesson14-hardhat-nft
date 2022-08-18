@@ -37,7 +37,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
 
     // Events
     event NftRequested(uint256 indexed requestId, address requester);
-    event NftMinted(Breed dogBreed, address indexed minter);
+    event NftMinted(Breed dogBreed, uint256 tokenId, address indexed minter);
 
     constructor(
         address vrfCoordinatorAddress,
@@ -80,7 +80,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
         _safeMint(nftOwner, newTokenId);
         s_tokenCounter += 1;
         _setTokenURI(newTokenId, s_dogTokenUris[uint256(dogBreed)]);
-        emit NftMinted(dogBreed, nftOwner);
+        emit NftMinted(dogBreed, newTokenId, nftOwner);
     }
 
     function getBreedFromModdedRng(uint256 moddedRng) public pure returns (Breed) {

@@ -2,9 +2,9 @@ const { assert, expect } = require("chai")
 const { deployments, ethers, network } = require("hardhat")
 const { developmentChains, networkConfig } = require("../../helper-hardhat-config")
 
-!developmentChains.includes(network.name) ? describe.skip : describe("BasicNft", testAll)
+!developmentChains.includes(network.name) ? describe.skip : describe("BasicNft", testBasicNft)
 
-function testAll() {
+function testBasicNft() {
     let basicNft
     let deployer
 
