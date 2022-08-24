@@ -62,8 +62,12 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log(`Start verifying contract deployed at ${randomIpfsNft.address} ...`)
         await verify(randomIpfsNft.address, args)
+
+        // Add VRF consumer for testnet
+        const vrfCoodinator = await ethers.getContractAt("VRFCoordinatorV2Interface", vrfCoordinatorV2Address, deployer)
+        await vrfCoodinator.addConsumer(subscriptionId, randomIpfsNft.address)
     } else {
-        // Localhost: add consumer
+        // Add VRF consumer for localhost
         await vrfCoordinatorV2Mock.addConsumer(subscriptionId, randomIpfsNft.address)
     }
 }

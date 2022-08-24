@@ -33,14 +33,23 @@ module.exports = {
         goerli: {
             url: GOERLI_RPC_URL,
             accounts: [PRIVATE_KEY],
-            chainId: 420,
+            chainId: 5,
             blockConfirmations: 6,
         },
     },
     etherscan: {
         apiKey: ETHERSCAN_API_KEY,
     },
-    solidity: "0.8.8",
+    solidity: {
+        compilers: [
+            {
+                version: "0.8.8",
+            },
+            {
+                version: "0.7.0",
+            },
+        ],
+    },
     namedAccounts: {
         deployer: {
             default: 0,
